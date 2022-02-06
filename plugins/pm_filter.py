@@ -403,6 +403,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "pages":
         await query.answer()
     elif query.data == "start":
+        await query.message.delete()
         buttons = [[
             InlineKeyboardButton('➕ Add Me To Your Groups ➕', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
         ], [
@@ -413,13 +414,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('😊 About', callback_data='about')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        await query.message.edit_text(
-            text=script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
+        await query.message.reply_sticker(
+            sticker="CAACAgIAAxkBAAEFQlZiAAECbThHUdgbhWYrJbhDDvFoW44AAtQMAAJ6i6BIni8iJJQzvJseBA",
+           # chat_id=query.chat.id,
             reply_markup=reply_markup,
             parse_mode='html'
         )
         await query.answer('Piracy Is Crime')
     elif query.data == "help":
+        await query.message.delete()
         buttons = [[
             InlineKeyboardButton('Manual Filter', callback_data='manuelfilter'),
             InlineKeyboardButton('Auto Filter', callback_data='autofilter')
@@ -431,8 +434,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('🔮 Status', callback_data='stats')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        await query.message.edit_text(
-            text=script.HELP_TXT.format(query.from_user.mention),
+        await query.message.reply_sticker(
+          #  chat_id=query.chat.id,
+            sticker="CAACAgIAAxkBAAEFQlZiAAECbThHUdgbhWYrJbhDDvFoW44AAtQMAAJ6i6BIni8iJJQzvJseBA",
             reply_markup=reply_markup,
             parse_mode='html'
         )
